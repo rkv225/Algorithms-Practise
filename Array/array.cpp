@@ -27,7 +27,7 @@ int search(int a[], int n, int x)
 void insert(int arr[], int size, int num, int pos)
 {
     //elements at end will get discarded
-    if (pos >= size && pos < 0) return;
+    if (pos >= size || pos < 0) return;
     //shift the elements to the right
     for (int i = size - 1; i > pos; i--)
     {
@@ -56,5 +56,7 @@ int main()
     insert(arr, siz, 10, 8);
     print_array(arr, siz);
     delete_num(arr, siz, 6);
+    print_array(arr, siz);
+    insert(arr, siz, 12, 8);
     print_array(arr, siz);
 }
