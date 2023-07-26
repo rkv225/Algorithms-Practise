@@ -81,6 +81,13 @@ public:
 		{
 			cout << *it << " ";
 		}
+		cout << endl;
+	}
+	void print_path(int dest)
+	{
+		if (Vertices[dest].parent != NIL)
+			print_path(Vertices[dest].parent);
+		cout << dest << "->";
 	}
 };
 
@@ -98,5 +105,6 @@ int main()
 	g.AddEdge(5, 5);
 	g.ComputeBFS(0);
 	g.print_traversal();
+	g.print_path(4);
 	return 0;
 }
