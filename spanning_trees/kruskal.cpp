@@ -1,8 +1,9 @@
 /*
 * Spanning is an acyclic subset of edges that connectes all of the vertices and their total sum of weight is minimum.
-* It spans the entire graph. If we assume cities connected by roads and we want to paint roads in such a manner that all cities have painted road to other cities.
-* The weight defines the paint required. Then,
-* MST will find the minimum paint required to paint the roads.
+* It spans the entire graph. If we assume cities connected by roads and we want to visit all cities.
+* The weight defines the distance between cities. Then,
+* MST will find the minimum cost required to visit all cities.
+* Kruskal Algorithm takes all the edges in graph in ascending order of their weights and if vertices of edge don't belong to same set then we union them.
 */
 #include<iostream>
 #include<vector>
