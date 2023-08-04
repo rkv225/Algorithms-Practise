@@ -38,7 +38,7 @@ public:
 		{
 			if (set_x == set_y) //already in same set
 				return;
-			union_helper(nodes[x], nodes[y]);
+			union_helper(set_x, set_y);
 		}
 	}
 
