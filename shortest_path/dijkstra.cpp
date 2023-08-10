@@ -95,7 +95,7 @@ public:
 			path.pop();
 			cout << "->" << v;
 		}
-		cout << "(destination)";
+		cout << "(destination), distance = " << V[dest].key;
 	}
 private:
 	int n;
