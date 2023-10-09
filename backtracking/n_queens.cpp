@@ -13,81 +13,31 @@ int n;
 
 bool check_matrix(int row, int col)
 {
-	int i = row, j = col;
-	// up
-	while (i >= 0)
-	{
-		if (matrix[i][j])
+	// check up down left right
+	for (int k = 0; k < n; k++)
+		if (matrix[k][col] || matrix[row][k])
 			return false;
-		i--;
-	}
-	// down
-	i = row;
-	while (i < n)
-	{
-		if (matrix[i][j])
-			return false;
-		i++;
-	}
-
-	// left
-	i = row;
-	while (j >= 0)
-	{
-		if (matrix[i][j])
-			return false;
-		j--;
-	}
-
-	//right
-	j = col;
-	while (j < n)
-	{
-		if (matrix[i][j])
-			return false;
-		j++;
-	}
 
 	// top right
-	j = col;
-	while (i >= 0 && j < n)
-	{
+	for (int i = row, j = col; i >= 0 && j < n; i--, j++)
 		if (matrix[i][j])
 			return false;
-		i--; 
-		j++;
-	}
 
 	// top left
-	i = row;
-	j = col;
-	while (i >= 0 && j >= 0)
-	{
+	for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
 		if (matrix[i][j])
 			return false;
-		i--;
-		j--;
-	}
+
 	// bottom right
-	i = row;
-	j = col;
-	while (i < n && j < n)
-	{
+	for (int i = row, j = col; i < n && j < n; i++, j++)
 		if (matrix[i][j])
 			return false;
-		i++;
-		j++;
-	}
+
 	// bottom left
-	i = row;
-	j = col;
-	while (i < n && j >= 0)
-	{
+	for (int i = row, j = col; i < n && j >= 0; i++, j--)
 		if (matrix[i][j])
 			return false;
-		i++;
-		j--;
-	}
+
 	return true;
 }
 
