@@ -1,5 +1,8 @@
 /*
 * Search for an element for an infinite sorted array using binary search in O(nlogn)
+* Solution: create a window of size 1 initially and keep on shifting and increasing by power of 2 
+* If the element if greater than window max element then shift
+* else element lies within the current window, so perform a binary search in it
 */
 
 #include <iostream>
