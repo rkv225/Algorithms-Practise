@@ -1,3 +1,7 @@
+/*
+/* Heap is a complete binary tree. In a max heap element in root in always larger than it's children.
+*/
+
 #include<iostream>
 #include<vector>
 #include<cmath>
@@ -24,7 +28,7 @@ public:
 	{
 		arr.push_back(x);
 	}
-	void Heapify(int i)
+	void Heapify(int i) // O(h), h = log n, O(log n)
 	{
 		int length = arr.size() - 1;
 		int largest = i;
