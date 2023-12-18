@@ -16,7 +16,7 @@ vector<int> sliding_max(vector<int>& arr, int window_size)
 	// fill inital window of given size
 	for (int i = 0; i < window_size; i++)
 	{
-		if (!q.empty() && q.back() < arr[i])
+		while (!q.empty() && q.back() <= arr[i])
 			q.pop_back();
 		q.push_back(arr[i]);
 	}
