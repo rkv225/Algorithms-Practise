@@ -1,5 +1,5 @@
 /*
-* left view and right view of binary tree
+* left view, right view, top view and bottom view of binary tree
 * time complexity: O(n) and space complexity O(n)
 */
 #include <iostream>
@@ -18,7 +18,7 @@ map<int, node*> level_map;
 
 void print_left_view_helper(node* root, int level)
 {
-	if (root == NULL) 
+	if (root == NULL)
 		return;
 	if (level_map.find(level) == level_map.end())
 		level_map[level] = root;
@@ -35,24 +35,54 @@ void print_right_view_helper(node* root, int level)
 	print_right_view_helper(root->right, level + 1);
 }
 
-void print_left_view(node* root)
+void print_top_view_helper(node* root, int level)
 {
-	level_map.clear();
-	print_left_view_helper(root, 1);
+	if (root == NULL)
+		return;
+	if (level_map.find(level) == level_map.end())
+		level_map[level] = root;
+	print_top_view_helper(root->left, level - 1);
+	print_top_view_helper(root->right, level + 1);
+}
 
+void print_bottom_view_helper(node* root, int level)
+{
+	if (root == NULL)
+		return;
+	level_map[level] = root;
+	print_bottom_view_helper(root->left, level - 1);
+	print_bottom_view_helper(root->right, level + 1);
+}
+
+void print_map()
+{
 	// print from ordered map
 	for (map<int, node*>::iterator it = level_map.begin(); it != level_map.end(); it++)
 		cout << (*it).second->value << endl;
 }
 
-void print_right_view(node* root)
+void print_view(node* root, char view)
 {
 	level_map.clear();
-	print_right_view_helper(root, 1);
-
-	// print from ordered map
-	for (map<int, node*>::iterator it = level_map.begin(); it != level_map.end(); it++)
-		cout << (*it).second->value << endl;
+	switch (view)
+	{
+	case 'l': 
+		print_left_view_helper(root, 1);
+		break;
+	case 'r':
+		print_right_view_helper(root, 1);
+		break;
+	case 't':
+		print_top_view_helper(root, 0);
+		break;
+	case 'b':
+		print_bottom_view_helper(root, 0);
+		break;
+	default:
+		cout << "invalid view" << endl;
+		break;
+	}
+	print_map();
 }
 
 int main()
@@ -75,9 +105,15 @@ int main()
 	curr = curr->left;
 	curr->left = new node{ 11, NULL, NULL };
 
-	cout << "Left view of binary tree: " << endl;
-	print_left_view(root);
+	cout << "left view of binary tree: " << endl;
+	print_view(root, 'l');
 
 	cout << "\nright view of binary tree: " << endl;
-	print_right_view(root);
+	print_view(root, 'r');
+
+	cout << "\ntop view of binary tree: " << endl;
+	print_view(root, 't');
+
+	cout << "\nbottom view of binary tree: " << endl;
+	print_view(root, 'b');
 }
