@@ -1,7 +1,8 @@
 /*
 * Finding the floor value of a bst. Floor value is the value equal to or greatest value smaller then given value.
 * If no such value exisits in tree then it's -1
-* link: https://practice.geeksforgeeks.org/problems/floor-in-bst/1
+* link-floor: https://practice.geeksforgeeks.org/problems/floor-in-bst/1
+* link-ceil: https://practice.geeksforgeeks.org/problems/implementing-ceil-in-bst/1
 * solution: search for the given value like a binary search and store the previous value if smaller than the given value.
 * Time complexity: O(log h) where h is the height of binary tree
 */
