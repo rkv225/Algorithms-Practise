@@ -5,6 +5,8 @@ If Frog jumps from 'ith' to 'jth' stair, the energy lost in the jump is given by
 If the Frog is on 'ith' staircase, he can jump either to '(i+1)th' stair or to '(i+2)th' stair. 
 Your task is to find the minimum total energy used by the frog to reach from '1st' stair to 'Nth' stair.
 
+Link: https://www.codingninjas.com/studio/problems/frog-jump_3621012
+
 Time Complexity: O(n) and space complexity: O(n)
 */
 
