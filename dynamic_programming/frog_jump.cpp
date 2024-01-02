@@ -19,3 +19,19 @@ int frogJump(int n, vector<int> &h)
         dp[i] = min(dp[i - 2] + abs(h[i] - h[i - 2]), dp[i - 1] + abs(h[i] - h[i - 1]));
     return dp[n - 1];
 }
+
+/*
+* Space optimization: we don't need the entire dp array, our current interation just needs the last 2 values.
+* O(1)
+*/
+int frogJump(int n, vector<int> &h)
+{
+    int prev2 = 0;
+    int prev = abs(h[1] - h[0]);
+    for (int i = 2; i < n; i++) {
+      int curr = min(prev2 + abs(h[i] - h[i - 2]), prev + abs(h[i] - h[i - 1]));
+      prev2 = prev;
+      prev = curr;
+    }
+    return prev;
+}

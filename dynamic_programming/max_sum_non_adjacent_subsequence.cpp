@@ -21,3 +21,20 @@ int maximumNonAdjacentSum(vector<int> &nums){
     }
     return dp[n - 1];
 }
+
+/*
+* Space complexity: O(1)
+*/
+
+int maximumNonAdjacentSum(vector<int> &nums){
+    int prev2 = 0;
+    int prev = nums[0];
+    for (int i = 1; i < nums.size(); i++) {
+        int sum_take = nums[i] + prev2;
+        int sum_reject = prev;
+        int curr = max(sum_take, sum_reject);
+        prev2 = prev;
+        prev = curr;
+    }
+    return prev;
+}
