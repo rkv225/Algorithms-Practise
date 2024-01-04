@@ -92,3 +92,36 @@ int uniquePaths(int m, int n) {
   }
   return prev[n - 1];
 }
+
+
+/*
+problem: Given a ‘N’ * ’M’ maze with obstacles, count and return the number of unique paths 
+to reach the right-bottom cell from the top-left cell. 
+A cell in the given maze has a value '-1' if it is a blockage or dead-end, else 0. 
+From a given cell, we are allowed to move to cells (i+1, j) and (i, j+1) only. 
+Since the answer can be large, print it modulo 10^9 + 7.
+
+link: https://www.codingninjas.com/studio/problems/maze-obstacles_977241
+*/
+int mazeObstacles(int n, int m, vector<vector<int>> &mat) {
+  vector<int> prev(m, 0);
+  vector<int> curr(m, 0);
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+          if (i == 0 && j == 0) {
+              curr[j] = 1;
+          } else if (mat[i][j] == -1) {
+              curr[j] = 0;
+          } else {
+              int top = prev[j];
+              int left = 0;
+              if (j > 0)
+                  left = curr[j - 1];
+              curr[j] = (top + left) % int(1e9+7);
+          }
+      }
+      prev = curr;
+  }
+  return prev[m - 1];
+}
+
