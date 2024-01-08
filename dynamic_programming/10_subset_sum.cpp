@@ -89,3 +89,40 @@ bool subsetSumToK(int n, int k, vector<int> &arr) {
     }
     return prev[k];
 }
+
+
+
+/*
+Problem variation: You are given an array 'ARR' of 'N' positive integers. Your task is to find if we can partition the given array into two subsets such that the sum of elements in both subsets is equal.
+
+For example, let’s say the given array is [2, 3, 3, 3, 4, 5], then the array can be partitioned as [2, 3, 5], and [3, 3, 4] with equal sum 10.
+
+Link: https://www.codingninjas.com/studio/problems/partition-equal-subset-sum_892980
+*/
+
+bool canPartition(vector<int> &arr, int n)
+{
+	int k = 0;
+	for (int i = 0; i < n; i++) {
+		k = k + arr[i];
+	}
+	if(k & 1 == 1)
+		return false;
+	k = k / 2;
+	vector<bool> prev(k + 1, false);
+    vector<bool> curr(k + 1, false);
+    prev[0] = true;
+    prev[arr[0]] = true;
+    for (int i = 1; i < n; i++) {
+        for(int j = 0; j <= k; j++) {
+            if (j == 0) prev[0] = true;
+            bool take = false;
+            if(j >= arr[i])
+                take = prev[j - arr[i]];
+            bool not_take = prev[j];
+            curr[j] = take || not_take;
+        }
+        prev = curr;
+    }
+    return prev[k];
+}
