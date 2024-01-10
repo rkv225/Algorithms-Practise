@@ -238,7 +238,25 @@ Partition 2: {5, 2, 1}, {5}. The subset difference between subset sum is: (5 + 2
 These two partitions are different because, in the 1st partition, S1 contains 5 from index 0, and in the 2nd partition, S1 contains 5 from index 2.
 
 Link: https://www.codingninjas.com/studio/problems/partitions-with-given-difference_3751628
+
+OR this problem can also be framed as 
+
+You are given an array ‘ARR’ of ‘N’ integers and a target number, ‘TARGET’. Your task is to build an expression out of an array by adding one of the symbols '+' and '-' before each integer in an array, and then by concatenating all the integers, you want to achieve a target. You have to return the number of ways the target can be achieved.
+
+For Example :
+You are given the array ‘ARR’ = [1, 1, 1, 1, 1], ‘TARGET’ = 3. The number of ways this target can be achieved is:
+1. -1 + 1 + 1 + 1 + 1 = 3
+2. +1 - 1 + 1 + 1 + 1 = 3
+3. +1 + 1 - 1 + 1 + 1 = 3
+4. +1 + 1 + 1 - 1 + 1 = 3
+5. +1 + 1 + 1 + 1 - 1 = 3
+These are the 5 ways to make. Hence the answer is 5.
+
+Link: https://www.codingninjas.com/studio/problems/target-sum_4127362
+
 */
+
+
 int countPartitions(int n, int d, vector<int> &arr) {
     int total = 0;
     for(int i = 0; i < n; i++)
