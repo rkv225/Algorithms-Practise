@@ -24,9 +24,10 @@ int f(int i, int sum, vector<int> &num){
         return 1e8;
     int ans = 1e8;
     if(sum >= num[i]){
-        ans = min(ans, f(i - 1, sum - num[i], num) + 1);
+        // take 
         ans = min(ans, f(i, sum - num[i], num) + 1);
     }
+    // not take
     ans = min(ans, f(i - 1, sum, num));
     return ans;
 }
@@ -48,9 +49,10 @@ int f(int i, int sum, vector<int> &num, vector<vector<int>> &dp){
     if(dp[i][sum] > -1) return dp[i][sum];
     int ans = 1e8;
     if(sum >= num[i]){
-        ans = min(ans, f(i - 1, sum - num[i], num, dp) + 1);
+        // take 
         ans = min(ans, f(i, sum - num[i], num, dp) + 1);
     }
+    // not take
     dp[i][sum] = min(ans, f(i - 1, sum, num, dp));
     return dp[i][sum];
 }
@@ -72,16 +74,16 @@ int minimumElements(vector<int> &num, int x)
     vector<vector<int>> dp(n, vector<int>(x + 1, maxi));
     for(int i = 0; i < n; i++)
         dp[i][0] = 0;
-    for (int i = 0; i < n; i++) {
+
+    for(int sum = 1; sum <= x; sum++)
+        dp[0][sum] = sum % num[0] == 0 ? sum / num[0] : maxi;  
+    
+    for (int i = 1; i < n; i++) {
         for(int sum = 1; sum <= x; sum++){
             dp[i][sum] = maxi;
-            if(sum >= num[i]){
-                if(i > 0)
-                    dp[i][sum] = min(dp[i][sum], dp[i - 1][sum - num[i]] + 1);
+            if(sum >= num[i])
                 dp[i][sum] = min(dp[i][sum], dp[i][sum - num[i]] + 1);
-            }
-            if(i > 0)
-                dp[i][sum] = min(dp[i][sum], dp[i - 1][sum]);
+            dp[i][sum] = min(dp[i][sum], dp[i - 1][sum]);
         }
     }
     return dp[n - 1][x] >= maxi ? -1 : dp[n - 1][x];

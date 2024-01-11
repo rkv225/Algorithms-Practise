@@ -1,4 +1,11 @@
 /*
+Problem:
+You are given an infinite supply of coins of each of denominations D = {D0, D1, D2, D3, ...... Dn-1}. You need to figure out the total number of ways W, in which you can make a change for value V using coins of denominations from D. Print 0, if a change isn't possible.
+
+Link: https://www.codingninjas.com/studio/problems/ways-to-make-coin-change_630471
+*/
+
+/*
 recursion
 */
 long f(int i , int v, int *deno){
