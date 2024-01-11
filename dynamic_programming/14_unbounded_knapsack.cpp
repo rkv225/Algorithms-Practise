@@ -54,7 +54,7 @@ int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight){
     for(int i = 0; i < n; i++)
         dp[i][0] = 0;
     for(int c = 1; c <= w; c++)
-        dp[0][c] = c % weight[0] == 0 ? (c / weight[0]) * profit[0] : mini; 
+        dp[0][c] = c >= weight[0] ? (int)(c / weight[0]) * profit[0] : mini; 
     for(int i = 1; i < n; i++){
         for(int c = 1; c <= w; c++){
             int take = mini;
@@ -72,18 +72,17 @@ space optimized tabulation
 */
 int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight){
     int mini = -1e8;
-    vector<int> prev(w + 1, mini);
-    prev[0] = 0;
-    for(int c = 1; c <= w; c++)
-        prev[c] = c % weight[0] == 0 ? (c / weight[0]) * profit[0] : mini; 
+    vector<int> dp(w + 1, mini);
+    for(int c = 0; c <= w; c++)
+        dp[c] = (int)(c / weight[0]) * profit[0];
     for(int i = 1; i < n; i++){
         for(int c = 1; c <= w; c++){
             int take = mini;
             if(c >= weight[i])
-                take = prev[c - weight[i]] + profit[i];
-            int not_take = prev[c];
-            prev[c] = max(take, not_take);
+                take = dp[c - weight[i]] + profit[i];
+            int not_take = dp[c];
+            dp[c] = max(take, not_take);
         }
     } 
-    return prev[w] > mini ? prev[w] : 0;
+    return dp[w];
 }
