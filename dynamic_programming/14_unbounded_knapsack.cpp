@@ -73,8 +73,7 @@ space optimized tabulation
 int unboundedKnapsack(int n, int w, vector<int> &profit, vector<int> &weight){
     int mini = -1e8;
     vector<int> prev(w + 1, mini);
-    for(int i = 0; i < n; i++)
-        prev[0] = 0;
+    prev[0] = 0;
     for(int c = 1; c <= w; c++)
         prev[c] = c % weight[0] == 0 ? (c / weight[0]) * profit[0] : mini; 
     for(int i = 1; i < n; i++){
