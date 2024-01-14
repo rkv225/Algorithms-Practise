@@ -94,3 +94,56 @@ int lcs(string s, string t)
 	}
 	return prev[t.size()];
 }
+
+/*
+printing longest common subsequence
+*/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+string lcs(string s, string t)
+{
+	vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
+	// filling up the dp matrix
+	for (int i = 1; i <= s.size(); i++) {
+		for (int j = 1; j <= t.size(); j++) {
+			if (s[i - 1] == t[j - 1])
+				dp[i][j] = 1 + dp[i - 1][j - 1];
+			else
+				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+		}
+	}
+	
+	int lcs_size = dp[s.size()][t.size()];
+	int i = s.size();
+	int j = t.size();
+	int k = lcs_size - 1;
+	string lcs;
+	lcs.resize(lcs_size);
+	while (i > 0 && j > 0) {
+		if (s[i - 1] == t[j - 1]) {
+			lcs[k] = (s[i - 1]);
+			i--;
+			j--;
+			k--;
+		}
+		else if (dp[i - 1][j] >= dp[i][j]) {
+			i--;
+		}
+		else {
+			j--;
+		}
+	}
+	return lcs;
+}
+
+int main()
+{
+	string s = "bdgek";
+	string t = "abcde";
+	cout << s << endl << t << endl;
+	cout << lcs(s, t) << endl;
+}
