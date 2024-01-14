@@ -147,3 +147,28 @@ int main()
 	cout << s << endl << t << endl;
 	cout << lcs(s, t) << endl;
 }
+
+/*
+problem variation: 
+You are given 2 non-empty strings 's1' and 's2' consisting of lowercase English alphabets only.
+In one operation you can do either of the following on 's1':
+(1) Remove a character from any position in 's1'.
+(2) Add a character to any position in 's1'.
+Find the minimum number of operations required to convert string 's1' into 's2'.
+
+Link: https://www.codingninjas.com/studio/problems/can-you-make_4244510
+
+Solution:
+given string length n of s and m of t
+assuming n > m then,
+deletions = n - len(lcs(s,t))
+insertions = m - len(lcs(s,t))
+deletions + insertions = n + m - 2 len(lcs(s,t)) 
+this is the required answer
+*/
+int canYouMake(string &s1, string &s2){
+    int n = s1.size();
+    int m = s2.size();
+    int lcs_len = lcs(s1, s2);
+    return n + m - (2 * lcs_len);
+}

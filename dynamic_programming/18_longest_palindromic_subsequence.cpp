@@ -7,9 +7,9 @@ Link: https://www.geeksforgeeks.org/problems/longest-palindromic-subsequence-161
 /*
 tabulation approach 
 */
-int longestPalinSubseq(string A) {
-    string s = A;
-    string t = string(A.rbegin(), A.rend());
+// from previous ques
+int lcs(string s, string t)
+{
     vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
     for(int i = 1; i <= s.size(); i++){
         for(int j = 1; j <= t.size(); j++){
@@ -20,6 +20,11 @@ int longestPalinSubseq(string A) {
         }
     }
     return dp[s.size()][t.size()];
+}
+int longestPalinSubseq(string A) {
+    string s = A;
+    string t = string(A.rbegin(), A.rend());
+    return lcs(s, t);
 }
 
 /*
@@ -39,22 +44,8 @@ If we insert the character ‘b’ after ‘c’, we get the string "abcba", whi
 Link: https://www.codingninjas.com/studio/problems/minimum-insertions-to-make-palindrome_985293
 
 */
-int longestPalinSubseq(string &A) {
-    string s = A;
-    string t = string(A.rbegin(), A.rend());
-    vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
-    for(int i = 1; i <= s.size(); i++){
-        for(int j = 1; j <= t.size(); j++){
-            if(s[i - 1] == t[j - 1])
-                dp[i][j] = 1 + dp[i - 1][j - 1];
-            else
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-        }
-    }
-    return A.size() - dp[s.size()][t.size()];
-}
-
 int minimumInsertions(string &str)
 {
-	return longestPalinSubseq(str);
+    // call the function to find lcs
+	return str.size() - longestPalinSubseq(str);
 }
