@@ -2,6 +2,7 @@
 * Dijkstra's algorithm solves single source shortest path problem. This follows the strategy to relax all the adjacent nodes till all the nodes are visited.
 * We keep a map to set the vertices visited and a priority queue to always take the vertex with minimum weight.
 * This only works for edges with non negative weight
+* time Complexity: O((E + V) log V) as for all vertices and eges, we relax at least once. and each operation in min heap is log V
 */
 #include<iostream>
 #include<vector>
