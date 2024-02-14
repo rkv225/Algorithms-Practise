@@ -3,6 +3,8 @@
 * We keep a map to set the vertices visited and a priority queue to always take the vertex with minimum weight.
 * This only works for edges with non negative weight
 * time Complexity: O((E + V) log V) as for all vertices and eges, we relax at least once. and each operation in min heap is log V
+* space complexity: O(V) for min heap
+* time complexity is O(V^2) using the adjacency matrix representation of graph
 */
 #include<iostream>
 #include<vector>

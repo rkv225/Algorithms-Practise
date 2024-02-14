@@ -21,7 +21,7 @@ Output: -1
 Solution: apply dijkstra for finding paths to all vertices from source vertex k. Then return the maximum of all the paths. 
 If there is any unvisited then return -1.
 
-Time complexity: O((E + V) log V)
+Time complexity: O(v^2)
 space complexity: O(V^2) for storing adjacency matrix
 
 Link: https://leetcode.com/problems/network-delay-time
