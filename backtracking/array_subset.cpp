@@ -16,7 +16,7 @@ Start with empty array & index i = 0
 either take the element at index i, put in array and move forward
 or don't take and move forward
 
-Time Complexity: O(2^n)
+Time Complexity: O(n*2^n)
 Space Complexity: O(2^n)
 
 Link: https://leetcode.com/problems/subsets/
