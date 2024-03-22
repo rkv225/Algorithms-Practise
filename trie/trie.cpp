@@ -80,3 +80,73 @@ int main()
 	cout << t->Query("pqr");
 	return 0;
 }
+
+
+/*
+Leetcode
+Link: https://leetcode.com/problems/implement-trie-prefix-tree/ 
+*/ 
+
+class Node {
+public: 
+    char val;
+    bool leaf;
+    vector<Node*> child;
+    Node(char v) {
+        val = v;
+        leaf = false;
+        child.resize(26);
+    }
+};
+class Trie {
+private:
+    Node *root;
+public:
+    Trie() {
+        root = new Node('#');
+    }
+    
+    void insert(string word) {
+        Node* curr = root;
+        for(int i = 0; i < word.size(); i++) {
+            int index = word[i] - 'a';
+            if(curr->child[index] == NULL) {
+                curr->child[index] = new Node(word[i]);
+            }
+            curr = curr->child[index];
+        }
+        curr->leaf = true;
+    }
+    
+    bool search(string word) {
+        Node* curr = root;
+        for(int i = 0; i < word.size(); i++) {
+            int index = word[i] - 'a';
+            if(curr->child[index] == NULL) {
+                return false;
+            }
+            curr = curr->child[index];
+        }
+        return curr->leaf;
+    }
+    
+    bool startsWith(string prefix) {
+        Node* curr = root;
+        for(int i = 0; i < prefix.size(); i++) {
+            int index = prefix[i] - 'a';
+            if(curr->child[index] == NULL) {
+                return false;
+            }
+            curr = curr->child[index];
+        }
+        return true;
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
