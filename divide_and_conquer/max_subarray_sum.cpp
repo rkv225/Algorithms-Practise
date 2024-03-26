@@ -1,4 +1,38 @@
 /*
+Link: https://leetcode.com/problems/maximum-subarray
+*/
+
+class Solution {
+public:
+    int crossing(int i, int m, int j, vector<int>& nums) {
+        int left_max = -1e8, right_max = -1e8, sum = 0;
+        for(int a = m; a >= i; a--) {
+            sum += nums[a];
+            left_max = max(left_max, sum);
+        }
+        sum = 0;
+        for(int b = m + 1; b <= j; b++) {
+            sum += nums[b];
+            right_max = max(right_max, sum);
+        }
+        return left_max + right_max;
+    }
+    int rec(int i, int j, vector<int>& nums) {
+        if(i == j)
+            return nums[i];
+        int m = (i + j) / 2;
+        int l = rec(i, m, nums);
+        int r = rec(m + 1, j, nums);
+        int c = crossing(i, m, j, nums);
+        return max(c, max(l, r));
+        return c;
+    }
+    int maxSubArray(vector<int>& nums) {
+        return rec(0, nums.size() - 1, nums);
+    }
+};
+
+/*
 * Maximum subarray sum problem using divide ad conquer strategy. 
 * We can assume that we can have maximum subarray in left half of array or in right half
 * Or we an have maximum subarray in crossing of left and right half
