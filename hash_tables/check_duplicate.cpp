@@ -1,0 +1,36 @@
+/*
+Problem:
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Example 1:
+Input: nums = [1,2,3,1]
+Output: true
+
+Example 2:
+Input: nums = [1,2,3,4]
+Output: false
+
+Example 3:
+Input: nums = [1,1,1,3,3,4,3,2,4,2]
+Output: true
+
+Solution: Store visited in a set and if the element already exists in set then we have duplicate
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Link: https://leetcode.com/problems/contains-duplicate/
+*/
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> visit;
+        for(int i = 0; i < nums.size(); i++) {
+            if(visit.find(nums[i]) != visit.end())
+                return true;
+            visit.insert(nums[i]);
+        }
+        return false;
+    }
+};
