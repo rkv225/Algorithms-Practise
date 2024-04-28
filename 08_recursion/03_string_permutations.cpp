@@ -17,10 +17,12 @@ void permutations(string prefix, string input)
 	}
 	for (string::iterator i = input.begin(); i != input.end(); i++)
 	{
+		// taking out rest of the input string except current character
 		string curr_str;
 		for (string::iterator ci = input.begin(); ci != input.end(); ci++)
 			if (ci != i)
 				curr_str.push_back(*ci);
+		// now add the current char to prefix and try other combinations with rest of the string
 		permutations(prefix + *i, curr_str);
 	}
 }
