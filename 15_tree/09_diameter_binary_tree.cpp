@@ -3,6 +3,7 @@
 * Solution: For all tree node we calculate the height of the binary tree left and right side 
 * and check if we have the largest diameter at the current node.
 * Time Complexity: O(n)
+Link: https://leetcode.com/problems/diameter-of-binary-tree
 */
 
 #include <iostream>
@@ -24,7 +25,9 @@ int find_height(node* root)
 		return 0;
 	int left_height = find_height(root->left);
 	int right_height = find_height(root->right);
+	// current diameter will be left + right 
 	diameter = max(diameter, left_height + right_height);
+	// although current diameter will be left + right, but max height can be from either left or right 
 	return 1 + max(left_height, right_height);
 }
 
