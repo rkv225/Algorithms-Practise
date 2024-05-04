@@ -66,3 +66,10 @@ int main()
 	bool x = two_sum(root, 15);
 	x = two_sum(root, 40);
 }
+
+/*
+Another solution:
+1. make an inorder traversal of a bst
+2. as we know that inorder traversal of bst is always sorted
+3. use two pointer approach to find the two numbers with the given value
+*/
