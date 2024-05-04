@@ -22,6 +22,6 @@ public:
         return is_same(p->left, q->right) && is_same(p->right, q->left);
     }
     bool isSymmetric(TreeNode* root) {
-        return is_same(root->left, root->right);
+        return root == NULL || is_same(root->left, root->right);
     }
 };
