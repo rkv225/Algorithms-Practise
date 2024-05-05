@@ -24,15 +24,9 @@ Output: [[0,0,0]]
 Explanation: The only possible triplet sums up to 0.
 
 Solution:
-In this approach, firstly, we will hash the indices of all elements in a hashMap. In case of repeated elements, the last occurence index would be stored in hashMap.
-Here also we fix a number (num[i]), by traversing the loop. But the loop traversal here for fixing numbers would leave last two indices. These last two indices would be covered by the nested loop.
-If number fixed is +ve, break there because we can't make it zero by searching after it.
-Make a nested loop to fix a number after the first fixed number. (num[j])
-To make sum 0, we would require the -ve sum of both fixed numbers. Let us say this required.
-Now, we will find the this required number in hashMap. If it exists in hashmap and its last occurrence index > 2nd fixed index, we found our triplet. Push it in answer vector.
-Update j to last occurence of 2nd fixed number to avoid duplicate triplets.
-Update i to last occurence of 1st fixed number to avoid duplicate triplets.
-Return answer vector.
+Mentioned in comments.
+This is giving TLE on leetcode but intuitive solution.
+
 
 Time Complexity: O(n*n)
 Space Complexity: O(n)
@@ -40,3 +34,48 @@ Space Complexity: O(n)
 Link: https://leetcode.com/problems/3sum
 */
 
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        // if less than 3 numbers
+        if(n < 3)
+            return {};
+        // if smallest number if greater than 0 then we can't effectively make sum = 0
+        if(nums[0] > 0)
+            return {};
+        vector<vector<int>> result;
+        unordered_map<string, vector<int>> final_triplets;
+        // hash the entire array
+        unordered_map<int, int> hash;
+        for(int i = 0; i < n - 1; i++)
+            hash[nums[i]] = i;
+        // for all combinations of 2 indices
+        for(int i = 0; i < n - 1; i++) {
+            if(nums[i] > 0)
+                continue;
+            for(int j = i + 1; j < n; j++) {
+                int cur = nums[i] + nums[j];
+                if(hash.find(cur * -1) != hash.end()) {
+                    // triplet with sum 0 found
+                    int k = hash[cur * -1];
+                    if(i != j && i != k && j != k) {
+                        // all three indexes must be different for a valid triplet
+                        vector<int> triplet = {nums[i], nums[j], nums[k]};
+                        // sort to avoid duplicate
+                        sort(triplet.begin(), triplet.end());
+                        string triplet_string = to_string(triplet[0]) + "," + to_string(triplet[1]) + "," + to_string(triplet[2]);
+                        if(final_triplets.find(triplet_string) == final_triplets.end())
+                            final_triplets[triplet_string] = triplet;
+                    }
+                }
+            }
+        }
+        for(auto i : final_triplets) {
+            vector<int> triplet = i.second;
+            result.push_back({ triplet[0], triplet[1], triplet[2] });
+        }
+        return result;
+    }
+};
