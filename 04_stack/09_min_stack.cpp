@@ -82,3 +82,53 @@ public:
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
  */
+
+
+/*
+Solution: using two stack
+one stack will be actual stack and other stack will have minimum
+now if our min_val top is greater or equal then we add new val then this means we have a new smaller value 
+*/
+
+class MinStack {
+public:
+    stack<int> min_val;
+    stack<int> container;
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+        container.push(val);
+        if(min_val.empty() || min_val.top() >= val)
+            min_val.push(val);
+    }
+    
+    void pop() {
+        int val = container.top();
+        container.pop();
+        if(val == min_val.top())
+            min_val.pop();
+    }
+    
+    int top() {
+        if(container.empty())
+            return -1;
+        return container.top();
+    }
+    
+    int getMin() {
+        if(min_val.empty())
+            return -1;
+        return min_val.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
